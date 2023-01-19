@@ -1,0 +1,6 @@
+{
+"router_id":" TZYSH9ACPDW", 
+"api":" https://care.dev.env.veego.io/",
+"mac": "94:b8:6d:6d:83:a5",
+"telemetry": "https://api-gateway.dev.env.veego.io/v1/agent/last-single-telemetry/TZYSH9ACPDW"
+}
