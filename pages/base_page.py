@@ -14,11 +14,12 @@ class BasePage:
         self.env_password = os.getenv("PASSWORD")
   
     def setup(self):
-        load_dotenv()
-        logging.basicConfig(level=logging.INFO,
-                            format='%(levelname)s : %(message)s',
-                            handlers=[logging.StreamHandler()])
-        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        # load_dotenv()
+        # logging.basicConfig(level=logging.INFO,
+        #                     format='%(levelname)s : %(message)s',
+        #                     handlers=[logging.StreamHandler()])
+        # urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        pass
         
 
     def logger(self,text):
