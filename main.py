@@ -16,10 +16,12 @@ from pages.youtube_page import YoutubePage
 from pages.telemetry import Telemetry
 # from selenium.webdriver import Remote
 
+
 class TelemetryTest(unittest.TestCase):
     def setUp(self):
         load_dotenv()
-        self.driver = webdriver.Chrome(executable_path="./drivers/chromedriver")
+        self.driver = webdriver.Chrome(
+            executable_path="./drivers/chromedriver")
         logging.basicConfig(level=logging.INFO,
                             format='%(levelname)s : %(message)s',
                             handlers=[logging.StreamHandler()])
@@ -28,12 +30,8 @@ class TelemetryTest(unittest.TestCase):
         with open("config.json", "r") as json_file:
             self.config_data = json.load(json_file)
 
-
         self.youtubepage = YoutubePage(self.driver)
-        self.telemetry = Telemetry(self.driver,self.config_data, 'Youtube')
-        
-        
-        
+        self.telemetry = Telemetry(self.driver, self.config_data, 'Youtube')
 
     def test_telemetry(self):
         self.youtubepage.run_youtube()
@@ -43,10 +41,6 @@ class TelemetryTest(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
+
 if __name__ == "__main__":
     unittest.main()
-
-
-
-
-

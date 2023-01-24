@@ -8,8 +8,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 
+
 class Telemetry(BasePage):
-    def __init__(self, driver,config_data, name):
+    def __init__(self, driver, config_data, name):
         super().__init__(driver)
         self.driver = driver
         self.config_data = config_data
@@ -30,10 +31,9 @@ class Telemetry(BasePage):
         login_button.click()
         time.sleep(5)
 
-        
-
     def return_page_service_items(self, name, type, is_classification_final):
         self.driver.refresh()
+        service_items = None
         body = self.driver.find_element(By.CSS_SELECTOR, "body")
         body_text = body.text
 
@@ -44,106 +44,79 @@ class Telemetry(BasePage):
 
         return service_items
 
-        #refactored version:
-        # body = self.driver.find_element(By.CSS_SELECTOR, "body")
-        # body_text = body.text
-        # text_to_json = json.loads(body_text)
-        # services = text_to_json["devices"][0]["discovery"]["devices"][self.config_data["mac"]]["services"]
-
-        # filtered_services = {}
-        # for key, value in services.items():
-        #     if value["is_classification_final"] == is_classification_final and value["type"] == type and value["name"] == name:
-        #         filtered_services[key] = value
-
-        # return filtered_services
-
-    def service_final_test(self, name):
-        pass
-        
-    
     def run_telemetry_test(self):
-        
+
         service_item = self.return_page_service_items(
             'Youtube', 'STREAMING', True)
-        try:
-            assert service_item
-            detection_time = datetime.utcnow()
-            for key in service_item.keys():
-                service_type = service_item[key]['type']
-                service_name = service_item[key]['name']
-                service_start_time_stamp = service_item[key]['start_time']
-                service_start_time_formatted = datetime.utcfromtimestamp(
-                    service_start_time_stamp/1000).strftime("%Y-%m-%d %H:%M:%S")
-                service_start_time = datetime.utcfromtimestamp(
-                    service_start_time_stamp/1000)
-                print(f"{service_name} {service_type} started at: {service_start_time_formatted}")
-        except AssertionError:
-            logging.warning("Fail: No Youtube service found")
 
-
-
-
-
-
+        # print(f"first detection: {service_item}")
 
         rerun = 0
-        while service_item:
-
-            uuid_key = next(iter(service_item))
-            for key in service_item.keys():
-
-                delta = detection_time - service_start_time
-
-                print(f'Name: {service_name}')
-                print(f'Service Type: {service_type}')
-                print(f'Recognized in: {delta} Minutes')
-                print(f'Service UUID: {uuid_key}')
-
-                self.service_final_test('Youtube')
-
-
-
-            if service_type == "STREAMING" and service_name == "" or service_name == None:
-                assert True
-                logging.info(
-                    "Partial PASS: Type is correct, name is empty")
-            elif service_type == "STREAMING" and service_name != "Youtube":
-                try:
-                    assert False
-                except AssertionError:
-                    logging.warning(
-                        "Fail: Type is correct, name is incorrect")
-            elif service_type == "STREAMING" and service_name == "Youtube":
-                logging.info("PASS: Both type and name are correct")
-                assert True
-            else:
-                logging.info("Fail: Type and/or name are incorrect")
-                assert False
-
-
-
-
-
-
-
-            
-            # service_item = False
-            # service_item = self.return_page_service_items(
-            #     'Youtube', 'STREAMING', True)
-            
-            total_testing_time = datetime.utcnow() - detection_time
-            if service_item:
+        detection_time = datetime.utcnow()
+        while True:
+            if rerun > 0:
                 print(
                     f"\nRunning service recognition test again ({rerun})..\n")
             else:
                 print(
-                    f"\nNo Service recognized for Youtube. Retrying Service recognition Test... ({rerun})...\n")
-                if total_testing_time.total_seconds() >= 360:
-                    total_testing_time = total_testing_time/60
+                    f"\nYoutube service detected... \n")
+
+            while service_item:
+
+                uuid_key = next(iter(service_item))
+
+                for key in service_item.keys():
+
+                    service_type = service_item[key]['type']
+                    service_name = service_item[key]['name']
+                    service_start_time_stamp = service_item[key]['start_time']
+                    service_start_time_formatted = datetime.utcfromtimestamp(
+                        service_start_time_stamp/1000).strftime("%Y-%m-%d %H:%M:%S")
+                    service_start_time = datetime.utcfromtimestamp(
+                        service_start_time_stamp/1000)
+
+                    delta = detection_time - service_start_time
+                    print(
+                        f"{service_name} {service_type} started at: {service_start_time_formatted}")
+                    print(f'Name: {service_name}')
+                    print(f'Service Type: {service_type}')
+                    print(f'Recognized in: {delta} Minutes')
+                    print(f'Service UUID: {uuid_key}')
+
+                if service_type == "STREAMING" and service_name == "Youtube":
+                    logging.info("PASS: Both type and name are correct")
+                elif service_type == "STREAMING" and service_name == "" or service_name == None:
+                    assert True
                     logging.info(
-                        f"No Youtube service recognized in {total_testing_time} minutes\n")
-                    assert False
-            service_item = self.return_page_service_items('Youtube', 'STREAMING', True)
-            rerun = rerun+1 
+                        "Partial PASS: Type is correct, name is empty")
+                elif service_type != "STREAMING" and service_name != "Youtube":
+
+                    logging.info(
+                        "Fail: Type is correct, name is incorrect")
+
+                else:
+                    logging.info("Fail: Type and/or name are incorrect")
+
+                service_item = self.return_page_service_items(
+                    'Youtube', 'STREAMING', True)
+                rerun = rerun+1
+                time.sleep(10)
+
+            total_testing_time = datetime.utcnow() - detection_time
+            if total_testing_time.total_seconds() >= 360:
+                total_testing_time = total_testing_time / \
+                    60  # Convert to minutes for Logging only
+                logging.info(
+                    f"No Youtube service recognized in {total_testing_time} minutes\n")
+                service_item = None
+                # break
+                assert False
+
+            else:
+                service_item = self.return_page_service_items(
+                    'Youtube', 'STREAMING', True)
+
+            print(
+                f"\nNo Service recognized for Youtube. Retrying Service recognition Test... ({rerun})...\n")
+            rerun = rerun+1
             time.sleep(10)
-    
