@@ -33,6 +33,7 @@ class Telemetry(BasePage):
         
 
     def return_page_service_items(self, name, type, is_classification_final):
+        self.driver.refresh()
         body = self.driver.find_element(By.CSS_SELECTOR, "body")
         body_text = body.text
 
@@ -79,6 +80,12 @@ class Telemetry(BasePage):
         except AssertionError:
             logging.warning("Fail: No Youtube service found")
 
+
+
+
+
+
+
         rerun = 0
         while service_item:
 
@@ -119,20 +126,24 @@ class Telemetry(BasePage):
 
 
 
-            self.driver.refresh()
-            service_item = False
-            service_item = self.return_page_service_items(
-                'Youtube', 'STREAMING', True)
-            rerun = rerun+1
+            
+            # service_item = False
+            # service_item = self.return_page_service_items(
+            #     'Youtube', 'STREAMING', True)
+            
+            total_testing_time = datetime.utcnow() - detection_time
             if service_item:
                 print(
                     f"\nRunning service recognition test again ({rerun})..\n")
             else:
                 print(
                     f"\nNo Service recognized for Youtube. Retrying Service recognition Test... ({rerun})...\n")
-                total_testing_time = datetime.utcnow() - detection_time
                 if total_testing_time.total_seconds() >= 360:
                     total_testing_time = total_testing_time/60
                     logging.info(
                         f"No Youtube service recognized in {total_testing_time} minutes\n")
+                    assert False
+            service_item = self.return_page_service_items('Youtube', 'STREAMING', True)
+            rerun = rerun+1 
             time.sleep(10)
+    

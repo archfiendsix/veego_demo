@@ -20,15 +20,20 @@ class TelemetryTest(unittest.TestCase):
     def setUp(self):
         load_dotenv()
         self.driver = webdriver.Chrome(executable_path="./drivers/chromedriver")
-        with open("config.json", "r") as json_file:
-            self.config_data = json.load(json_file)
-        self.youtubepage = YoutubePage(self.driver)
-        self.telemetry = Telemetry(self.driver,self.config_data, 'Youtube')
-        
         logging.basicConfig(level=logging.INFO,
                             format='%(levelname)s : %(message)s',
                             handlers=[logging.StreamHandler()])
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+        with open("config.json", "r") as json_file:
+            self.config_data = json.load(json_file)
+
+
+        self.youtubepage = YoutubePage(self.driver)
+        self.telemetry = Telemetry(self.driver,self.config_data, 'Youtube')
+        
+        
+        
 
     def test_telemetry(self):
         self.youtubepage.run_youtube()
