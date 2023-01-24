@@ -43,6 +43,19 @@ class Telemetry(BasePage):
 
         return service_items
 
+        #refactored version:
+        # body = self.driver.find_element(By.CSS_SELECTOR, "body")
+        # body_text = body.text
+        # text_to_json = json.loads(body_text)
+        # services = text_to_json["devices"][0]["discovery"]["devices"][self.config_data["mac"]]["services"]
+
+        # filtered_services = {}
+        # for key, value in services.items():
+        #     if value["is_classification_final"] == is_classification_final and value["type"] == type and value["name"] == name:
+        #         filtered_services[key] = value
+
+        # return filtered_services
+
     def service_final_test(self, name):
         pass
         

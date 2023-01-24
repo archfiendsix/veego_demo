@@ -3,6 +3,8 @@ import logging
 import urllib3
 from selenium import webdriver
 from dotenv import load_dotenv
+from selenium.webdriver.common.action_chains import ActionChains
+
 import os
 
 class BasePage:
@@ -18,4 +20,6 @@ class BasePage:
                             handlers=[logging.StreamHandler()])
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         
-        
+
+    def logger(self,text):
+        logging.info(text)
