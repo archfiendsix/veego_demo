@@ -107,7 +107,7 @@ class Telemetry(BasePage):
                 total_testing_time = total_testing_time / \
                     60  # Convert to minutes for Logging only
                 logging.info(
-                    f"No Youtube service recognized in {total_testing_time} minutes\n")
+                    f"No Youtube service recognized for the passed {total_testing_time} minutes\n")
                 service_item = None
                 # break
                 assert False
