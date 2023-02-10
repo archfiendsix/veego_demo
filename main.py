@@ -6,7 +6,7 @@ import urllib3
 import json
 import os
 import unittest
-
+import pytest
 import logging
 import urllib3
 # from selenium.webdriver.common.by import By
@@ -33,7 +33,12 @@ class TelemetryTest(unittest.TestCase):
         self.youtubepage = YoutubePage(self.driver)
         self.telemetry = Telemetry(self.driver, self.config_data, 'Youtube')
 
-    def test_telemetry(self):
+    def test_youtube(self):
+        self.youtubepage.run_youtube()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test()
+
+    def test_youtube2(self):
         self.youtubepage.run_youtube()
         self.telemetry.run_telemetry()
         self.telemetry.run_telemetry_test()
@@ -44,3 +49,4 @@ class TelemetryTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

@@ -31,14 +31,41 @@ class Telemetry(BasePage):
         login_button.click()
         time.sleep(5)
 
+    
+
+    # def return_page_service_items(self, name, type, is_classification_final):
+    #     self.driver.refresh()
+    #     logging.info("Looking for services...")
+    #     service_items = None
+    #     body = self.driver.find_element(By.CSS_SELECTOR, "body")
+    #     body_text = body.text
+
+       
+    #     body_text=body
+
+    #     text_to_json = json.loads(body_text)
+    #     services = text_to_json["devices"][0]["discovery"]["devices"][self.config_data["mac"]]["services"]
+    #     assert services, "No runnning services found"
+    #     service_items = {key: value for key, value in services.items(
+    #     ) if value["is_classification_final"] == is_classification_final and value["type"] == type and value["name"] == name}
+
+    #     return service_items
+
     def return_page_service_items(self, name, type, is_classification_final):
         self.driver.refresh()
+        logging.info("Looking for services...")
         service_items = None
         body = self.driver.find_element(By.CSS_SELECTOR, "body")
         body_text = body.text
 
-        text_to_json = json.loads(body_text)
+        try:
+            text_to_json = json.loads(body_text)
+        except json.decoder.JSONDecodeError as e:
+            logging.error(f"Failed to parse JSON data: {e}")
+            return
+
         services = text_to_json["devices"][0]["discovery"]["devices"][self.config_data["mac"]]["services"]
+        assert services, "No runnning services found"
         service_items = {key: value for key, value in services.items(
         ) if value["is_classification_final"] == is_classification_final and value["type"] == type and value["name"] == name}
 
