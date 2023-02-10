@@ -8,7 +8,7 @@ from pages.base_page import BasePage
 
 
 class YoutubePage(BasePage):
-    def __init__(self, driver):
+    def __init__(self, driver):     
         super().__init__(driver)
         self.driver = driver
         self.actions = ActionChains(self.driver)
