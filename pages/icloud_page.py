@@ -46,20 +46,6 @@ class IcloudPage(BasePage):
         self.driver.maximize_window()
         # jjk = input('Enter')
 
-        cookies = [
-            {'name': 'SSPZ', 'value': '172138'},
-            {'name': 'DSP2F_71', 'value': '343983'},
-            {'name': 'vs', 'value': '242441=5325914&503171=5082295&219976=5089374&521966=5102021&557984=5282398&497351=5282396'},
-            {'name': 'DSP2F_55', 'value': '298424'},
-            {'name': 'TAPAD', 'value': "%7B%22id%22%3A%22a0403514-f4c3-452e-8339-d24fb887d075%22%7D"},
-            {'name': 'jwt_fingerprint', 'value': 'a67c8658085334bcbb95563244e29cab'},
-            {'name': '_hjSessionUser_1264276',
-                'value': 'eyJpZCI6IjEyODk3NWUwLTA3ZTktNTU5Zi05MjExLWQ2YjI5MDQ5MmQ3ZiIsImNyZWF0ZWQiOjE2NzYyNzcxNTYyMDEsImV4aXN0aW5nIjp0cnVlfQ=='},
-            # Add more cookies as needed
-        ]
-        
-        # self.dump_cookies()
-        # self.load_cookies()
         time.sleep(60)
 
     def delete_file(self):
