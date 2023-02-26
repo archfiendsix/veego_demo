@@ -26,6 +26,7 @@ index.html
 sample.json
 
 # Files to large for repo
-fixtures/upload_files/
 fixtures/gparted.iso
 fixtures/music.mp3
+fixtures/upload_files/gparted.iso
+fixtures/upload_files/music.mp3
