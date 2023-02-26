@@ -87,7 +87,7 @@ class SoundcloudPage(BasePage):
         file_upload_input = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(file_input_locator)
         )
-        file_path = os.path.abspath("fixtures/music.mp3")
+        file_path = os.path.abspath("fixtures/upload_files/music.mp3")
         file_upload_input.send_keys(file_path)
 
         save_button_locator = (By.CSS_SELECTOR, 'button[title="Save"]')
@@ -96,8 +96,8 @@ class SoundcloudPage(BasePage):
         )
         self.driver.execute_script("arguments[0].scrollIntoView();", save_button)
         save_button.click()
-        self.dump_cookies()
-        self.load_cookies()
+        # self.dump_cookies()
+        # self.load_cookies()
         # Wait for the upload to complete
         time.sleep(20)
         

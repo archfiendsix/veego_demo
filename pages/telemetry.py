@@ -4,6 +4,7 @@ import logging
 import requests
 from selenium import webdriver
 from datetime import datetime
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -11,15 +12,21 @@ from pages.base_page import BasePage
 
 
 class Telemetry(BasePage):
-    def __init__(self, driver, config_data, ):
+    def __init__(self, driver, config_data):
         super().__init__(driver)
         self.driver = driver
         self.config_data = config_data
         self.login_texbox_locator = (By.ID, "username")
 
     def run_telemetry(self):
-        self.driver.execute_script("window.open('');")
-        self.driver.switch_to.window(self.driver.window_handles[1])
+        # self.driver.execute_script("window.open('');")
+        self.driver.switch_to.new_window('tab')
+        # self.driver.execute_script("window.open();")
+        # body = self.driver.find_element(By.CSS_SELECTOR, "body")
+        # body.send_keys(Keys.CONTROL + 't')
+        time.sleep(10)
+
+        # self.driver.switch_to.window(self.driver.window_handles[-1])
         self.driver.get(
             self.config_data["telemetry"]+self.config_data["router_id"])
 
@@ -43,7 +50,6 @@ class Telemetry(BasePage):
             password_textbox.send_keys(self.env_password)
             login_button.click()
 
-       
         time.sleep(5)
 
         # self.driver.get("http://127.0.0.1:5500/selenium_chrome/index.html")
@@ -52,7 +58,7 @@ class Telemetry(BasePage):
         # Switch to the second tab
         # self.driver.switch_to.window(self.driver.window_handles[1])
         self.driver.refresh()
-        # logging.info("\nLooking for services...\n")
+        # self.logger("\nLooking for services...\n")
         service_items = None
 
         # Test code */
@@ -91,7 +97,7 @@ class Telemetry(BasePage):
 
     # def return_page_service_items(self, name, type, is_classification_final):
     #     self.driver.refresh()
-    #     logging.info("Looking for services...")
+    #     self.logger("Looking for services...")
     #     service_items = None
 
     #     with open("sample.json", "r") as json_file:
@@ -114,7 +120,7 @@ class Telemetry(BasePage):
     #     return service_items
 
     def run_telemetry_test(self, service, service_type, classification_final):
-        logging.info("\nLooking for services...\n")
+        self.logger("\nLooking for services...\n")
         # Initialize variables
         rerun = 0
         max_runtime = 10 * 60  # 10 minutes in seconds
@@ -138,29 +144,29 @@ class Telemetry(BasePage):
                 delta = detection_time - service_start_time
                 print(
                     f"{detected_service_name} {detected_service_type} started at: {service_start_time}")
-                print(f"Name: {detected_service_name}")
+                print(f"\nName: {detected_service_name}")
                 print(f"Service Type: {detected_service_type}")
                 print(f"Recognized in: {delta} Minutes")
-                print(f"Service UUID: {uuid_key}")
+                print(f"Service UUID: {uuid_key}\n")
 
                 # Check if service is correct and log message accordingly
                 if detected_service_name == service and detected_service_name == service:
-                    logging.info("PASS: Both type and name are correct")
+                    self.logger("PASS: Both type and name are correct")
                 elif detected_service_type == service_type and (not detected_service_name or detected_service_name == ''):
                     assert True
-                    logging.warning(
+                    self.logger(
                         "Partial PASS: Type is correct, name is empty")
                 elif detected_service_type == service_type and detected_service_name != service:
-                    logging.warning("Fail: Type is correct, name is incorrect")
+                    self.logger("Fail: Type is correct, name is incorrect")
                 else:
-                    logging.error("Fail: Type and/or name are incorrect")
+                    self.logger("Fail: Type and/or name are incorrect")
 
                 # Wait before trying to detect service again
                 time.sleep(10)
 
                 # Check if maximum runtime has been reached and exit if it has
                 if (datetime.utcnow() - detection_time).total_seconds() > max_runtime:
-                    logging.info("Maximum runtime exceeded, exiting function")
+                    self.logger("Maximum runtime exceeded, exiting function")
                     return
 
                 # Try to detect the service again
@@ -172,7 +178,7 @@ class Telemetry(BasePage):
             total_testing_time = datetime.utcnow() - detection_time
             if total_testing_time.total_seconds() >= 360:
                 total_testing_time = total_testing_time / 60
-                logging.info(
+                self.logger(
                     f"No {service} service recognized for the past {total_testing_time} minutes\n")
                 assert False
                 return

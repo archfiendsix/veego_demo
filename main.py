@@ -6,6 +6,8 @@ import unittest
 import urllib3
 import pathlib
 import pickle
+import re
+from playwright.sync_api import Page, expect
 from selenium.webdriver.chrome.options import Options
 import undetected_chromedriver as webdriver
 # from selenium import webdriver
@@ -76,30 +78,30 @@ class TelemetryTest(unittest.TestCase):
         self.icloud_page = IcloudPage(self.driver, self.test_sites_data)
 
     def test_youtube_streaming(self):
-        self.youtube_page.run_youtube_streaming()
+        self.youtube_page.run_youtube_streaming(20)
         self.telemetry.run_telemetry()
         self.telemetry.run_telemetry_test('Youtube', 'STREAMING', True)
 
-    # def test_youtube_download(self):
-    #     self.youtube_page.run_youtube_download()
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('Youtube', 'DOWNLOAD', True)
+    def test_youtube_download(self):
+        self.youtube_page.run_youtube_download()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('Youtube', 'DOWNLOAD', True)
 
-    # def test_twitter_social(self):
-    #     # Open Twitter Social (DONE - runner, checker)
-    #     self.twitter_page.run_twitter()
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('Twitter', 'SOCIAL', True)
+    def test_twitter_social(self):
+        # Open Twitter Social (DONE - runner, checker)
+        self.twitter_page.run_twitter()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('Twitter', 'SOCIAL', True)
 
     # def test_messenger_conference(self):
     #     # Open a messenger conference (not done)
     #     self.messenger_page.run_messenger_conference()
 
-    # def test_soundcloud_music(self):
-    #     #play a soundcloud music (DONE - runner, checker)
-    #     self.soundcloud_page.run_soundcloud_music()
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('SoundCloud', 'MUSIC', True)
+    def test_soundcloud_music(self):
+        #play a soundcloud music (DONE - runner, checker)
+        self.soundcloud_page.run_soundcloud_music()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('SoundCloud', 'MUSIC', True)
 
     # def test_soundcloud_upload(self):
     #     # Execute soundcloud upload (done)
@@ -107,16 +109,18 @@ class TelemetryTest(unittest.TestCase):
     #     self.telemetry.run_telemetry()
     #     self.telemetry.run_telemetry_test('SoundCloud', 'UPLOAD', True)
 
-    # def test_microsoft_download(self):
-    #     # Test downloading a file from Microsoft's website (DONE - runner, checker - But no services shows on api)
-    #     self.microsoft_page.run_microsoft_download()
+    def test_microsoft_download(self):
+        # Test downloading a file from Microsoft's website (DONE - runner, checker - But no services shows on api)
+        self.microsoft_page.run_microsoft_download()
 
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('Microsoft', 'DOWNLOAD', True)
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('Microsoft', 'DOWNLOAD', True)
 
-    # def test_nexusmods_download(self):
-    #     # Test downloading a file from Nexus Mods
-    #     self.nexusmods_page.run_nexusmods_download()
+    def test_nexusmods_download(self):
+        # Test downloading a file from Nexus Mods
+        self.nexusmods_page.run_nexusmods_download()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('NexusMods', 'DOWNLOAD', True)
 
     # def test_icloud_download(self):
     #     # Test downloading a file from iCloud

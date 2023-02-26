@@ -23,3 +23,9 @@ downloads/
 .idea/
 
 index.html
+sample.json
+
+# Files to large for repo
+fixtures/upload_files/
+fixtures/gparted.iso
+fixtures/music.mp3

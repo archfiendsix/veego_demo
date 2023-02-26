@@ -30,15 +30,14 @@ class TwitterPage(BasePage):
         # signin_email_textbox = self.driver.find_element(By.ID, 'sign_in_up_email')
         # signin_email_textbox.send_keys(soundcloud_email)
 
-    def run_twitter(self):
+    def run_twitter(self,timeout=180):
         
         self.driver.get(self.test_sites["twitter_social"])
         
         # self.load_cookies()
         # self.twitter_signin(self.env_twitter_email, self.env_twitter_password)
         self.logger(f'\nRunning Twitter Social... \n')
-        time.sleep(180)
-        self.dump_cookies()
-        self.load_cookies()
+        time.sleep(timeout)
+     
 
    

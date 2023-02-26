@@ -58,8 +58,8 @@ class IcloudPage(BasePage):
             # Add more cookies as needed
         ]
         
-        self.dump_cookies()
-        self.load_cookies()
+        # self.dump_cookies()
+        # self.load_cookies()
         time.sleep(60)
 
     def delete_file(self):
@@ -101,8 +101,8 @@ class IcloudPage(BasePage):
         )
         delete_button.click()
 
-        self.dump_cookies()
-        self.load_cookies()
+        # self.dump_cookies()
+        # self.load_cookies()
 
     def run_icloud_upload(self):
         self.delete_file()
@@ -136,11 +136,11 @@ class IcloudPage(BasePage):
                 input_element_locator)
         )
 
-        input_element.send_keys("fixtures/gparted.iso")
+        input_element.send_keys("fixtures/upload_files/gparted.iso")
 
         self.logger(f'\nStarting iCloud Upload test... \n')
-        self.dump_cookies()
-        self.load_cookies()
+        # self.dump_cookies()
+        # self.load_cookies()
         #
 
         time.sleep(180)
@@ -181,6 +181,6 @@ class IcloudPage(BasePage):
         first_file.click()
 
         self.logger(f'\nStarting iCloud Download test... \n')
-        self.dump_cookies()
-        self.load_cookies()
+        # self.dump_cookies()
+        # self.load_cookies()
         time.sleep(300)

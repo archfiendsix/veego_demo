@@ -18,7 +18,7 @@ class MicrosoftPage(BasePage):
 
    
 
-    def run_microsoft_download(self):
+    def run_microsoft_download(self, timeout=180):
         
         self.driver.get(self.test_sites["microsoft_download"])
         
@@ -53,8 +53,6 @@ class MicrosoftPage(BasePage):
         final_download_btn = self.driver.find_element(By.XPATH, '//*[@id="card-info-content"]/div/div/div/a')
         final_download_btn.click()
         self.logger(f'\nMicrosoft download started... \n')
-        self.dump_cookies()
-        self.load_cookies()
-        time.sleep(180)
+        time.sleep(timeout)
 
    
