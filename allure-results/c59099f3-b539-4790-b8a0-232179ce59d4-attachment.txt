@@ -1,0 +1,4 @@
+[32mINFO    [0m WDM:logger.py:11 ====== WebDriver manager ======
+[32mINFO    [0m WDM:logger.py:11 Get LATEST chromedriver version for google-chrome 110.0.5481
+[32mINFO    [0m WDM:logger.py:11 Driver [/home/sace/.wdm/drivers/chromedriver/linux64/110.0.5481/chromedriver] found in cache
+[32mINFO    [0m undetected_chromedriver.patcher:patcher.py:216 patching driver executable /home/sace/.local/share/undetected_chromedriver/undetected_chromedriver

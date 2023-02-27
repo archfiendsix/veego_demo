@@ -17,7 +17,6 @@ class TiktokPage(BasePage):
 
     def twitter_signin(self, twitter_email, twitter_password):
         self.driver.get(self.test_sites["tiktok_social"])
-        time.sleep(3000)
         # wait = WebDriverWait(self.driver, self.timeout).until(
         #     EC.presence_of_element_located((By.CSS_SELECTOR, '.header__loginMenu button[title="Sign in"]'))
         # )

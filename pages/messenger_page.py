@@ -13,7 +13,7 @@ class MessengerPage(BasePage):
         self.driver = driver
         self.actions = ActionChains(self.driver)
 
-    def run_messenger_conference(self):
+    def run_messenger_conference(self, timeout=180):
         self.logger(f'\nStarting Messenger Conferencing test... \n')
         self.driver.maximize_window()
         self.driver.get('https://www.messenger.com/')
@@ -27,5 +27,5 @@ class MessengerPage(BasePage):
         continue_as_btn.click()
 
         
-        time.sleep(3000)
+        time.sleep(timeout)
         

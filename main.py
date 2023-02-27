@@ -60,10 +60,11 @@ class TelemetryTest(unittest.TestCase):
         logging.getLogger().setLevel(logging.INFO)
 
         # Load configuration data and test site data from JSON files
-        with open("config.json", "r") as json_file:
+        config_dir = os.path.join(os.getcwd(), "config.json")
+        with open(config_dir, "r") as json_file:
             self.config_data = json.load(json_file)
-
-        with open("fixtures/test_sites.json", "r") as test_sites_json_file:
+        testsites_dir = os.path.join(os.getcwd(), "fixtures/test_sites.json")
+        with open(testsites_dir, "r") as test_sites_json_file:
             self.test_sites_data = json.load(test_sites_json_file)
 
         # Initialize page objects
