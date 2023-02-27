@@ -93,12 +93,8 @@ class Telemetry(BasePage):
                 service_start_time = datetime.utcfromtimestamp(
                     service_item[uuid_key]['start_time']/1000)
                 delta = detection_time - service_start_time
-                print(
-                    f"{detected_service_name} {detected_service_type} started at: {service_start_time}")
-                print(f"\nName: {detected_service_name}")
-                print(f"Service Type: {detected_service_type}")
-                print(f"Recognized in: {delta} Minutes")
-                print(f"Service UUID: {uuid_key}\n")
+                self.logger(
+                    f"{detected_service_name} {detected_service_type} started at: {service_start_time}\nName: {detected_service_name}\nService Type: {detected_service_type}\nRecognized in: {delta} Minutes\nService UUID: {uuid_key}\n")
 
                 # Check if service is correct and log message accordingly
                 if detected_service_name == service and detected_service_name == service:
