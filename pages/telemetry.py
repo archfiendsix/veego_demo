@@ -19,11 +19,8 @@ class Telemetry(BasePage):
         self.login_texbox_locator = (By.ID, "username")
 
     def run_telemetry(self):
-        # self.driver.execute_script("window.open('');")
         self.driver.switch_to.new_window('tab')
-        # self.driver.execute_script("window.open();")
-        # body = self.driver.find_element(By.CSS_SELECTOR, "body")
-        # body.send_keys(Keys.CONTROL + 't')
+
         time.sleep(10)
 
         # self.driver.switch_to.window(self.driver.window_handles[-1])
@@ -52,33 +49,11 @@ class Telemetry(BasePage):
 
         time.sleep(5)
 
-        # self.driver.get("http://127.0.0.1:5500/selenium_chrome/index.html")
-
     def return_page_service_items(self, name, type, is_classification_final):
-        # Switch to the second tab
-        # self.driver.switch_to.window(self.driver.window_handles[1])
+
         self.driver.refresh()
-        # self.logger("\nLooking for services...\n")
         service_items = None
 
-        # Test code */
-        # Set up authentication credentials
-        # username = self.env_username
-        # password = str(self.env_password)
-        # auth = (username, password)
-
-        # response = requests.get(self.config_data['telemetry']+self.config_data['router_id'], auth=auth)
-
-        # # Check if the request was successful
-        # if response.status_code == 200:
-        #     # Get the response body as text
-        #     body_text = response.text
-        #     # Do something with the body text
-        #     print(body_text)
-        # else:
-        #     print('Failed to make request:', response.status_code)
-
-        # Test code */
         body = self.driver.find_element(By.CSS_SELECTOR, "body")
         body_text = body.text
 
@@ -94,30 +69,6 @@ class Telemetry(BasePage):
         ) if value["is_classification_final"] == is_classification_final and value["type"] == type and value["name"] == name}
 
         return service_items
-
-    # def return_page_service_items(self, name, type, is_classification_final):
-    #     self.driver.refresh()
-    #     self.logger("Looking for services...")
-    #     service_items = None
-
-    #     with open("sample.json", "r") as json_file:
-    #         body = json.load(json_file)
-
-    #     # body = self.driver.find_element(By.CSS_SELECTOR, "body")
-    #     body_text = body.text
-
-    #     try:
-    #         text_to_json = json.loads(body_text)
-    #     except json.decoder.JSONDecodeError as e:
-    #         logging.error(f"Failed to parse JSON data: {e}")
-    #         return
-
-    #     services = text_to_json["devices"][0]["discovery"]["devices"][self.config_data["mac"]]["services"]
-    #     assert services, "No runnning services found"
-    #     service_items = {key: value for key, value in services.items(
-    #     ) if value["is_classification_final"] == is_classification_final and value["type"] == type and value["name"] == name}
-
-    #     return service_items
 
     def run_telemetry_test(self, service, service_type, classification_final):
         self.logger("\nLooking for services...\n")
