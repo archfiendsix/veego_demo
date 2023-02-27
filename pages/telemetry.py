@@ -39,11 +39,12 @@ class Telemetry(BasePage):
                 EC.presence_of_element_located(
                     self.login_texbox_locator)
             )
+            login_texbox.clear()
             login_texbox.send_keys(self.env_username)
 
             password_textbox = self.driver.find_element(By.ID, "password")
             login_button = self.driver.find_element(By.ID, "kc-login")
-
+            password_textbox.clear()
             password_textbox.send_keys(self.env_password)
             login_button.click()
 

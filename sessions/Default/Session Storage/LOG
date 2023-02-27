@@ -1,6 +1,5 @@
-2023/02/27-15:33:34.046 6555 Reusing MANIFEST /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/Session Storage/MANIFEST-000001
-2023/02/27-15:33:34.047 6555 Recovering log #6
-2023/02/27-15:33:34.048 6555 Reusing old log /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/Session Storage/000006.log 
-2023/02/27-15:33:40.820 6556 Level-0 table #10: started
-2023/02/27-15:33:40.830 6556 Level-0 table #10: 12071 bytes OK
-2023/02/27-15:33:40.834 6556 Delete type=0 #6
+2023/02/27-22:12:32.202 2a083 Reusing MANIFEST /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/Session Storage/MANIFEST-000001
+2023/02/27-22:12:32.203 2a083 Recovering log #16
+2023/02/27-22:12:32.204 2a083 (ignoring error) /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/Session Storage/000016.log: dropping 31590 bytes; Corruption: checksum mismatch
+2023/02/27-22:12:32.204 2a083 (ignoring error) /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/Session Storage/000016.log: dropping 880 bytes; Corruption: missing start of fragmented record(2)
+2023/02/27-22:12:32.204 2a083 Reusing old log /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/Session Storage/000016.log 

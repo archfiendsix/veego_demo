@@ -22,7 +22,7 @@ from pages.telemetry import Telemetry
 from pages.twitter_page import TwitterPage
 from pages.youtube_page import YoutubePage
 from pages.icloud_page import IcloudPage
-
+from pages.tiktok_page import TiktokPage
 
 class TelemetryTest(unittest.TestCase):
     def setUp(self):
@@ -76,63 +76,70 @@ class TelemetryTest(unittest.TestCase):
         self.nexusmods_page = NexusModsPage(self.driver, self.test_sites_data)
         self.microsoft_page = MicrosoftPage(self.driver, self.test_sites_data)
         self.icloud_page = IcloudPage(self.driver, self.test_sites_data)
+        self.tiktok_page = TiktokPage(self.driver, self.test_sites_data)
 
     def test_youtube_streaming(self):
         self.youtube_page.run_youtube_streaming(180)
         self.telemetry.run_telemetry()
         self.telemetry.run_telemetry_test('Youtube', 'STREAMING', True)
 
-    # def test_youtube_download(self):
-    #     self.youtube_page.run_youtube_download()
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('Youtube', 'DOWNLOAD', True)
+    def test_youtube_download(self):
+        self.youtube_page.run_youtube_download()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('Youtube', 'DOWNLOAD', True)
 
-    # def test_twitter_social(self):
-    #     # Open Twitter Social (DONE - runner, checker)
-    #     self.twitter_page.run_twitter()
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('Twitter', 'SOCIAL', True)
+    def test_twitter_social(self):
+        # Open Twitter Social (DONE - runner, checker)
+        self.twitter_page.run_twitter()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('Twitter', 'SOCIAL', True)
+    
+    def test_tiktok_social(self):
+        # Open Twitter Social (DONE - runner, checker)
+        self.tiktok_page.run_tiktok()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('Tiktok', 'SOCIAL', True)
 
-    # def test_messenger_conference(self):
-    #     # Open a messenger conference (not done)
-    #     self.messenger_page.run_messenger_conference()
+    def test_messenger_conference(self):
+        # Open a messenger conference (not done)
+        self.messenger_page.run_messenger_conference()
 
-    # def test_soundcloud_music(self):
-    #     #play a soundcloud music (DONE - runner, checker)
-    #     self.soundcloud_page.run_soundcloud_music()
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('SoundCloud', 'MUSIC', True)
+    def test_soundcloud_music(self):
+        #play a soundcloud music (DONE - runner, checker)
+        self.soundcloud_page.run_soundcloud_music()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('SoundCloud', 'MUSIC', True)
 
-    # def test_soundcloud_upload(self):
-    #     # Execute soundcloud upload (done)
-    #     self.soundcloud_page.run_soundcloud_upload()
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('SoundCloud', 'UPLOAD', True)
+    def test_soundcloud_upload(self):
+        # Execute soundcloud upload (done)
+        self.soundcloud_page.run_soundcloud_upload()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('SoundCloud', 'UPLOAD', True)
 
-    # def test_microsoft_download(self):
-    #     # Test downloading a file from Microsoft's website (DONE - runner, checker - But no services shows on api)
-    #     self.microsoft_page.run_microsoft_download()
+    def test_microsoft_download(self):
+        # Test downloading a file from Microsoft's website (DONE - runner, checker - But no services shows on api)
+        self.microsoft_page.run_microsoft_download()
 
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('Microsoft', 'DOWNLOAD', True)
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('Microsoft', 'DOWNLOAD', True)
 
-    # def test_nexusmods_download(self):
-    #     # Test downloading a file from Nexus Mods
-    #     self.nexusmods_page.run_nexusmods_download()
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('NexusMods', 'DOWNLOAD', True)
+    def test_nexusmods_download(self):
+        # Test downloading a file from Nexus Mods
+        self.nexusmods_page.run_nexusmods_download()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('NexusMods', 'DOWNLOAD', True)
 
-    # def test_icloud_download(self):
-    #     # Test downloading a file from iCloud
-    #     self.icloud_page.run_icloud_download()
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('Microsoft', 'DOWNLOAD', True)
+    def test_icloud_download(self):
+        # Test downloading a file from iCloud
+        self.icloud_page.run_icloud_download()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('Microsoft', 'DOWNLOAD', True)
 
-    # def test_icloud_upload(self):
-    #     # Test downloading a file from Nexus Mods
-    #     self.icloud_page.run_icloud_upload()
-    #     self.telemetry.run_telemetry()
-    #     self.telemetry.run_telemetry_test('iCloud', 'UPLOAD', True)
+    def test_icloud_upload(self):
+        # Test downloading a file from Nexus Mods
+        self.icloud_page.run_icloud_upload()
+        self.telemetry.run_telemetry()
+        self.telemetry.run_telemetry_test('iCloud', 'UPLOAD', True)
 
     def tearDown(self):
         # Close the browser

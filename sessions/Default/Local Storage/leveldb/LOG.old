@@ -1,3 +1,6 @@
-2023/02/27-15:29:54.315 60e8 Reusing MANIFEST /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/Local Storage/leveldb/MANIFEST-000001
-2023/02/27-15:29:54.316 60e8 Recovering log #13
-2023/02/27-15:29:54.316 60e8 Reusing old log /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/Local Storage/leveldb/000013.log 
+2023/02/27-22:06:46.077 29a07 Reusing MANIFEST /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/Local Storage/leveldb/MANIFEST-000001
+2023/02/27-22:06:46.078 29a07 Recovering log #35
+2023/02/27-22:06:46.080 29a07 Reusing old log /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/Local Storage/leveldb/000035.log 
+2023/02/27-22:07:11.026 29a08 Level-0 table #37: started
+2023/02/27-22:07:11.030 29a08 Level-0 table #37: 39390 bytes OK
+2023/02/27-22:07:11.033 29a08 Delete type=0 #35
