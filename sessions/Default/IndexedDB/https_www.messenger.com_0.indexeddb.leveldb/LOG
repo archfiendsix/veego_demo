@@ -1,8 +1,0 @@
-2023/02/27-22:27:10.222 2b340 Creating DB /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/IndexedDB/https_www.messenger.com_0.indexeddb.leveldb since it was missing.
-2023/02/27-22:27:10.225 2b340 Reusing MANIFEST /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/IndexedDB/https_www.messenger.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/02/27-22:27:10.225 2b340 Recovering log #4
-2023/02/27-22:27:10.226 2b340 Reusing old log /home/sace/Desktop/Veego_env/selenium_chrome/sessions/Default/IndexedDB/https_www.messenger.com_0.indexeddb.leveldb/000004.log 
-2023/02/27-22:27:10.658 2b340 Level-0 table #6: started
-2023/02/27-22:27:10.659 2b340 Level-0 table #6: 560 bytes OK
-2023/02/27-22:27:10.660 2b340 Delete type=0 #4
-2023/02/27-22:27:10.660 2b340 Manual compaction at level-0 from '\x00\x01\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x02\x00\x00\x00' @ 0 : 0; will stop at (end)
